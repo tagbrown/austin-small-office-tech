@@ -1,7 +1,4 @@
 # Cloudflare Pages Redirects
-# Pretty URLs - remove .html extension
+# Note: Cloudflare Pages automatically handles pretty URLs (serving .html files without extension)
+# Only add custom redirects here if needed
 
-/about    /about.html    200
-/services /services.html 200
-/faq      /faq.html      200
-/contact  /contact.html  200
