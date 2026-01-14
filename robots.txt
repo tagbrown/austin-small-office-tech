@@ -1,0 +1,7 @@
+# robots.txt for Austin Small Office Tech
+
+User-agent: *
+Allow: /
+
+# Sitemap location (update with your domain)
+Sitemap: https://austinsmallofficetech.com/sitemap.xml

@@ -1,0 +1,7 @@
+# Cloudflare Pages Redirects
+# Pretty URLs - remove .html extension
+
+/about    /about.html    200
+/services /services.html 200
+/faq      /faq.html      200
+/contact  /contact.html  200
