@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Austin Small Office Tech</title>
+    <meta name="description" content="Meet the team behind Austin Small Office Tech. Local Austin IT support built specifically for small offices with 1-15 people.">
+    <link rel="canonical" href="https://austinsmallofficetech.com/about">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        atx: {
+                            teal: '#2a9d8f',
+                            tealLight: '#e8f5f3',
+                            tealDark: '#1e7268',
+                            orange: '#e76f51',
+                            orangeLight: '#fdf0ed',
+                            cream: '#fefae0',
+                            sand: '#e9e5d6',
+                        },
+                        warm: {
+                            50: '#fdfcf9',
+                            100: '#f9f6f0',
+                            200: '#f0ebe0',
+                            700: '#5c5346',
+                            800: '#3d382f',
+                            900: '#2a2620',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-white text-warm-700 font-sans">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/95 backdrop-blur-sm z-40 border-b border-warm-100">
+        <div class="max-w-6xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center">
+                    <span class="text-xl font-bold text-warm-900">ASOT</span>
+                    <span class="text-warm-500 text-sm ml-2 hidden sm:inline">Austin Small Office Tech</span>
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="about.html" class="text-atx-teal font-medium">About</a>
+                    <a href="services.html" class="text-warm-700 hover:text-atx-teal">Services</a>
+                    <a href="testimonials.html" class="text-warm-700 hover:text-atx-teal">Testimonials</a>
+                    <a href="faq.html" class="text-warm-700 hover:text-atx-teal">FAQ</a>
+                    <a href="contact.html" class="bg-warm-900 text-white px-5 py-2.5 rounded-lg hover:bg-warm-800 font-semibold">
+                        Get Started
+                    </a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-warm-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2">
+                <div class="flex flex-col gap-3">
+                    <a href="about.html" class="text-atx-teal font-medium py-2">About</a>
+                    <a href="services.html" class="text-warm-700 hover:text-atx-teal py-2">Services</a>
+                    <a href="testimonials.html" class="text-warm-700 hover:text-atx-teal py-2">Testimonials</a>
+                    <a href="faq.html" class="text-warm-700 hover:text-atx-teal py-2">FAQ</a>
+                    <a href="contact.html" class="bg-warm-900 text-white px-5 py-2.5 rounded-lg hover:bg-warm-800 font-semibold text-center mt-2">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-28 pb-16 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-atx-teal font-semibold mb-4">About Us</p>
+            <h1 class="text-4xl md:text-5xl font-bold text-warm-900 leading-tight mb-6">
+                We started ASOT because small offices
+                <span class="text-atx-orange">deserve better IT support</span>
+            </h1>
+            <p class="text-xl text-warm-700 max-w-2xl mx-auto leading-relaxed">
+                Not enterprise-grade complexity. Not break/fix techs who vanish. Just reliable, ongoing support from people who actually pick up the phone.
+            </p>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="py-20 px-6 bg-warm-100">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-warm-900 mb-6">Our story</h2>
+                    <p class="text-warm-700 mb-6 leading-relaxed">
+                        We've spent years working in IT, and we kept seeing the same problem: small offices were either paying enterprise prices for services they didn't need, or they were stuck with unreliable break/fix techs who treated them as an afterthought.
+                    </p>
+                    <p class="text-warm-700 mb-6 leading-relaxed">
+                        Meanwhile, someone on their team (usually the youngest or "most tech-savvy" person) became the unofficial IT department. That's not fair to them, and it's not good for the business.
+                    </p>
+                    <p class="text-warm-700 leading-relaxed">
+                        We built Austin Small Office Tech to be the third option: professional, reliable IT support that's actually designed for offices your size. No overkill. No disappearing acts. Just good support from people who know your name.
+                    </p>
+                </div>
+                <div class="bg-white rounded-2xl p-8 border border-warm-200">
+                    <h3 class="text-lg font-semibold text-warm-900 mb-6">What drives us</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 bg-atx-teal rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="text-warm-900 font-medium">Small offices matter</span>
+                                <p class="text-warm-700 text-sm mt-1">You're the backbone of Austin's economy. You deserve IT support that treats you that way.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 bg-atx-teal rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="text-warm-900 font-medium">Technology should help, not frustrate</span>
+                                <p class="text-warm-700 text-sm mt-1">When your tech works, you can focus on what you're actually good at.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-6 h-6 bg-atx-teal rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="text-warm-900 font-medium">Relationships beat transactions</span>
+                                <p class="text-warm-700 text-sm mt-1">We'd rather have 50 clients who love us than 500 who barely know our name.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why We're Different -->
+    <section class="py-20 px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-warm-900 mb-4">Why we're different</h2>
+                <p class="text-warm-700 max-w-2xl mx-auto">
+                    We're not trying to be everything to everyone. We're trying to be exactly what small Austin offices need.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-atx-tealLight rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-6 h-6 text-atx-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-warm-900 mb-2">Local to Austin</h3>
+                    <p class="text-warm-700 text-sm">We live here, work here, and can be at your office when you need us. No outsourced call centers, no anonymous tickets.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-atx-tealLight rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-6 h-6 text-atx-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-warm-900 mb-2">Right-sized for you</h3>
+                    <p class="text-warm-700 text-sm">We focus exclusively on offices with 1-15 people. That means we understand your challenges and don't try to sell you enterprise solutions.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-atx-tealLight rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-6 h-6 text-atx-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-warm-900 mb-2">Plain English</h3>
+                    <p class="text-warm-700 text-sm">We explain things in ways that make sense. No jargon, no condescension, no making you feel dumb for asking questions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Austin Section -->
+    <section class="py-20 px-6 bg-warm-100">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-warm-900 mb-4">Proud to serve Austin</h2>
+                <p class="text-warm-700 max-w-2xl mx-auto">
+                    We support small offices throughout the Austin metro area, from downtown to the suburbs. In-office, remote, or hybrid, we've got you covered.
+                </p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white px-4 py-3 rounded-lg text-center border border-warm-200">
+                    <span class="text-warm-800 text-sm font-medium">Downtown Austin</span>
+                </div>
+                <div class="bg-white px-4 py-3 rounded-lg text-center border border-warm-200">
+                    <span class="text-warm-800 text-sm font-medium">South Austin</span>
+                </div>
+                <div class="bg-white px-4 py-3 rounded-lg text-center border border-warm-200">
+                    <span class="text-warm-800 text-sm font-medium">North Austin</span>
+                </div>
+                <div class="bg-white px-4 py-3 rounded-lg text-center border border-warm-200">
+                    <span class="text-warm-800 text-sm font-medium">East Austin</span>
+                </div>
+                <div class="bg-white px-4 py-3 rounded-lg text-center border border-warm-200">
+                    <span class="text-warm-800 text-sm font-medium">West Lake Hills</span>
+                </div>
+                <div class="bg-white px-4 py-3 rounded-lg text-center border border-warm-200">
+                    <span class="text-warm-800 text-sm font-medium">Round Rock</span>
+                </div>
+                <div class="bg-white px-4 py-3 rounded-lg text-center border border-warm-200">
+                    <span class="text-warm-800 text-sm font-medium">Cedar Park</span>
+                </div>
+                <div class="bg-white px-4 py-3 rounded-lg text-center border border-warm-200">
+                    <span class="text-warm-800 text-sm font-medium">+ Remote Teams</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6 bg-warm-900">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-white mb-4">Ready to meet your new IT team?</h2>
+            <p class="text-warm-200 mb-8 text-lg">
+                Let's have a quick conversation about your office and see if we're a good fit.
+            </p>
+            <a href="contact.html" class="inline-block bg-atx-orange text-white px-8 py-4 rounded-lg hover:bg-opacity-90 font-semibold text-lg">
+                Schedule a Call
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-warm-800">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <span class="text-white font-bold text-lg">ASOT</span>
+                    <p class="text-warm-200 text-sm mt-1">Austin Small Office Tech</p>
+                    <p class="text-warm-400 text-sm mt-4 max-w-sm">
+                        IT support built for small Austin offices. Local team, plain English, same-day response.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-3">Quick Links</h4>
+                    <div class="flex flex-col gap-2">
+                        <a href="about.html" class="text-warm-300 hover:text-white text-sm">About</a>
+                        <a href="services.html" class="text-warm-300 hover:text-white text-sm">Services</a>
+                        <a href="testimonials.html" class="text-warm-300 hover:text-white text-sm">Testimonials</a>
+                        <a href="faq.html" class="text-warm-300 hover:text-white text-sm">FAQ</a>
+                        <a href="contact.html" class="text-warm-300 hover:text-white text-sm">Get Started</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-3">Contact</h4>
+                    <div class="flex flex-col gap-2">
+                        <a href="mailto:hello@austinsmallofficetech.com" class="text-warm-300 hover:text-white text-sm">hello@austinsmallofficetech.com</a>
+                        <a href="tel:+15125551234" class="text-warm-300 hover:text-white text-sm">(512) 555-1234</a>
+                        <p class="text-warm-400 text-sm">Austin, TX</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-warm-700 pt-8 text-center">
+                <p class="text-warm-500 text-sm">&copy; 2025 Austin Small Office Tech. IT support for small Austin offices and remote teams.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
