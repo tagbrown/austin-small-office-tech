@@ -1,0 +1,14 @@
+{
+  "name": "austin-small-office-tech",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static marketing site for Austin Small Office Tech.",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./css/tailwind.css --minify",
+    "build": "npm run build:css && bash scripts/build-dist.sh",
+    "test": "node --test worker/contact.test.mjs"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

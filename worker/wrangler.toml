@@ -1,0 +1,23 @@
+name = "asot-contact"
+main = "index.js"
+compatibility_date = "2024-12-01"
+# Tag's personal Cloudflare account (Browntag@gmail.com). The austinsmallofficetech.com zone lives here.
+account_id = "51a8da47fd9cf86dece22773be076efb"
+workers_dev = false
+
+# Cloudflare email relay. destination_address MUST be verified in Email Routing first
+# (Email Routing > Destination addresses). This is where contact-form mail is delivered.
+[[send_email]]
+name = "SEND_EMAIL"
+destination_address = "browntag@gmail.com"
+
+# Workers routes intercept /api/* on the canonical domain ahead of Pages.
+# atxtechservices.com is the canonical/primary site; austinsmallofficetech.com 301-redirects to it,
+# so the form is only ever served (and submitted) on atxtechservices.com.
+[[routes]]
+pattern = "atxtechservices.com/api/*"
+zone_id = "635cbd7d4041274c390f5b30571f1c99"
+
+[[routes]]
+pattern = "www.atxtechservices.com/api/*"
+zone_id = "635cbd7d4041274c390f5b30571f1c99"
