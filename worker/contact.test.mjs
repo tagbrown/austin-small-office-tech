@@ -57,7 +57,7 @@ test('buildRawEmail produces valid headers and strips injection from name', () =
   assert.match(raw, /^From: ASOT Contact Form <noreply@austinsmallofficetech\.com>/m);
   assert.match(raw, /^To: <browntag@gmail\.com>/m);
   assert.match(raw, /^Reply-To: Jamie  Subject: hijack <jamie@shop\.com>/m);
-  assert.match(raw, /^Subject: austinsmallofficetech\.com: Jamie/m);
+  assert.match(raw, /^Subject: Austin Small Office Tech: Jamie/m);
   assert.match(raw, /Jamie's Office/);
   const headerLines = raw.split('\r\n\r\n')[0].split('\r\n');
   assert.equal(headerLines.filter((l) => l.startsWith('Subject:')).length, 1);

@@ -11,12 +11,13 @@ workers_dev = false
 name = "SEND_EMAIL"
 destination_address = "browntag@gmail.com"
 
-# Workers routes intercept /api/* on the domain ahead of Pages. Fill in the austinsmallofficetech.com
-# zone id (Cloudflare dashboard > austinsmallofficetech.com > Overview > Zone ID) before deploying.
+# Workers routes intercept /api/* on the canonical domain ahead of Pages.
+# atxtechservices.com is the canonical/primary site; austinsmallofficetech.com 301-redirects to it,
+# so the form is only ever served (and submitted) on atxtechservices.com.
 [[routes]]
-pattern = "austinsmallofficetech.com/api/*"
-zone_id = "9b74a27269abade4a646fec758070991"
+pattern = "atxtechservices.com/api/*"
+zone_id = "635cbd7d4041274c390f5b30571f1c99"
 
 [[routes]]
-pattern = "www.austinsmallofficetech.com/api/*"
-zone_id = "9b74a27269abade4a646fec758070991"
+pattern = "www.atxtechservices.com/api/*"
+zone_id = "635cbd7d4041274c390f5b30571f1c99"

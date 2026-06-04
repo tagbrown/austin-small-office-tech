@@ -1,10 +1,13 @@
-// Cloudflare Worker: handles POST /api/contact for austinsmallofficetech.com.
+// Cloudflare Worker: handles POST /api/contact for the Austin Small Office Tech site.
 // Sends mail via Cloudflare's email relay (Email Routing send_email binding) — no third-party API.
-// Deployed separately from the Pages site; a Workers route on austinsmallofficetech.com/api/*
-// intercepts the request ahead of Pages (Pages Functions cannot use send_email; a Worker route can).
+// Deployed separately from the Pages site; a Workers route on atxtechservices.com/api/* (the canonical
+// domain) intercepts the request ahead of Pages (Pages Functions cannot use send_email; a Worker route can).
 import { EmailMessage } from "cloudflare:email";
 import { validateContact, buildRawEmail } from "./validate.js";
 
+// Envelope From. Stays on austinsmallofficetech.com because Email Routing is enabled (and the destination
+// verified) on that zone; atxtechservices.com has no Email Routing configured. This is the relay envelope
+// only — recipients see the "ASOT Contact Form" display name and Reply-To is the actual sender.
 const FROM_ADDRESS = "noreply@austinsmallofficetech.com";
 // TO_ADDRESS must equal the verified Email Routing destination_address in wrangler.toml.
 const TO_ADDRESS = "browntag@gmail.com";

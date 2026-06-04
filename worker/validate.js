@@ -29,10 +29,10 @@ export function buildRawEmail(fields, fromAddress, toAddress) {
   const name = headerSafe(fields.name);
   const email = headerSafe(fields.email);
   const business = String(fields.business || '').replace(/[\r\n]/g, ' ').trim();
-  const subject = `austinsmallofficetech.com: ${name}`;
+  const subject = `Austin Small Office Tech: ${name}`;
 
   const body = [
-    'New message from austinsmallofficetech.com',
+    'New message from the Austin Small Office Tech website (atxtechservices.com)',
     '',
     `Name: ${name}`,
     `Email: ${email}`,
