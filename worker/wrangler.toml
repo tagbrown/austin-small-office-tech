@@ -15,8 +15,8 @@ destination_address = "browntag@gmail.com"
 # zone id (Cloudflare dashboard > austinsmallofficetech.com > Overview > Zone ID) before deploying.
 [[routes]]
 pattern = "austinsmallofficetech.com/api/*"
-zone_id = "REPLACE_WITH_ASOT_ZONE_ID"
+zone_id = "9b74a27269abade4a646fec758070991"
 
 [[routes]]
 pattern = "www.austinsmallofficetech.com/api/*"
-zone_id = "REPLACE_WITH_ASOT_ZONE_ID"
+zone_id = "9b74a27269abade4a646fec758070991"
