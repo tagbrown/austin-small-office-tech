@@ -4,6 +4,9 @@
 const EMAIL_RE = /^[^\s@,;<>]+@[^\s@,;<>]+\.[^\s@,;<>]+$/;
 
 export function validateContact(payload) {
+  // A valid JSON body can still be null / a string / an array. Coerce to an object
+  // so property access below never throws (which would surface as a 500, not a 400).
+  if (!payload || typeof payload !== 'object') payload = {};
   const name = (payload.name || '').trim().slice(0, 200);
   const email = (payload.email || '').trim().slice(0, 200);
   const business = (payload.business || '').trim().slice(0, 200);

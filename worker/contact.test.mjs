@@ -8,6 +8,14 @@ test('rejects when required fields missing', () => {
   assert.match(r.error, /required/i);
 });
 
+test('does not throw on non-object payloads (null, string, array)', () => {
+  for (const bad of [null, undefined, 'hi', 42, ['a@b.com']]) {
+    const r = validateContact(bad);
+    assert.equal(r.ok, false);
+    assert.match(r.error, /required/i);
+  }
+});
+
 test('rejects invalid email', () => {
   const r = validateContact({ name: 'A', email: 'not-an-email', message: 'hi there' });
   assert.equal(r.ok, false);
