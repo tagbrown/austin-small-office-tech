@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASOT Track A — Concept Review</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif; background: #1c1e21; height: 100vh; display: flex; flex-direction: column; }
+  .bar { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; background: #1c1e21; flex-shrink: 0; }
+  .bar span { color: #9da0a8; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; margin-right: 0.5rem; }
+  .bar button { font: inherit; font-size: 0.85rem; font-weight: 600; padding: 0.45rem 0.9rem; border-radius: 4px; border: 1px solid #3a3e46; background: transparent; color: #c8cad0; cursor: pointer; }
+  .bar button:hover { border-color: #6a6e78; }
+  .bar button.active { background: #2a9d8f; border-color: #2a9d8f; color: #fff; }
+  .bar button:focus-visible { outline: 2px solid #2a9d8f; outline-offset: 2px; }
+  iframe { flex: 1; border: 0; width: 100%; background: #fff; }
+</style>
+</head>
+<body>
+<div class="bar">
+  <span>ASOT Track A</span>
+  <button data-src="concept-1-fresh-coat.html" class="active">1 · fresh-coat</button>
+  <button data-src="concept-2-morning-light.html">2 · morning-light</button>
+  <button data-src="concept-3-switchboard.html">3 · switchboard</button>
+</div>
+<iframe src="concept-1-fresh-coat.html" title="Concept preview"></iframe>
+<script>
+  const frame = document.querySelector("iframe");
+  document.querySelectorAll(".bar button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".bar button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      frame.src = btn.dataset.src;
+    });
+  });
+</script>
+</body>
+</html>
