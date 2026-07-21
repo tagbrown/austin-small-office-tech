@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Austin Small Office Tech | IT Support for Small Austin Offices</title>
+    <meta name="description" content="IT support for small Austin offices with 1 to 15 people. Local team, same-day response, Mac and PC, month-to-month plans. One number to call: (512) 318-2635. We pick up.">
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --atx-teal: #2a9d8f;
+            --atx-teal-dark: #1e7268;
+            --atx-teal-light: #e8f5f3;
+            --atx-orange: #e76f51;
+            --atx-orange-light: #fdf0ed;
+            --atx-cream: #fefae0;
+            --atx-sand: #e9e5d6;
+            --signal-amber: #f4a261;
+            --warm-50: #fdfcf9;
+            --warm-200: #f0ebe0;
+            --warm-700: #5c5346;
+            --warm-800: #3d382f;
+            --warm-900: #2a2620;
+            --deep-harbor: #264653;
+        }
+
+        @layer base {
+            html {
+                scroll-behavior: smooth;
+            }
+            body {
+                font-family: 'Public Sans', system-ui, sans-serif;
+                color: var(--warm-700);
+                background-color: var(--warm-50);
+                line-height: 1.6;
+            }
+            h1, h2, h3, h4 {
+                font-family: 'Bricolage Grotesque', 'Public Sans', system-ui, sans-serif;
+                font-weight: 600;
+                color: var(--warm-900);
+                letter-spacing: -0.015em;
+                line-height: 1.12;
+            }
+            a:focus-visible,
+            button:focus-visible {
+                outline: 3px solid var(--atx-teal-dark);
+                outline-offset: 3px;
+                border-radius: 4px;
+            }
+            .band-dark a:focus-visible,
+            .band-dark button:focus-visible {
+                outline-color: var(--atx-teal-light);
+                outline-offset: 4px;
+            }
+            @media (prefers-reduced-motion: reduce) {
+                html {
+                    scroll-behavior: auto;
+                }
+            }
+        }
+
+        .font-display { font-family: 'Bricolage Grotesque', 'Public Sans', system-ui, sans-serif; }
+        .font-story { font-family: 'Source Serif 4', Georgia, serif; }
+        .mono { font-family: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace; }
+
+        /* Film grain, page-wide and subtle: a fixed overlay so every surface reads physical. */
+        .film-grain {
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            pointer-events: none;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='0.7'/></svg>");
+            background-size: 180px 180px;
+        }
+
+        /* Soft warm shadows: morning-light's shadow signature. */
+        .shadow-warm {
+            box-shadow: 0 10px 30px -8px rgba(92, 83, 70, 0.28), 0 2px 8px -2px rgba(92, 83, 70, 0.18);
+        }
+        .shadow-warm-lg {
+            box-shadow: 0 24px 50px -16px rgba(92, 83, 70, 0.35), 0 6px 16px -6px rgba(92, 83, 70, 0.2);
+        }
+
+        /* Hero backdrop: 16:9 photo at reduced opacity, left third kept quiet under a cream gradient. */
+        .hero-band {
+            position: relative;
+            background-color: var(--atx-cream);
+            overflow: hidden;
+        }
+        .hero-photo {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 70% 50%;
+            opacity: 0.62;
+            animation: heroBreath 28s ease-in-out infinite alternate;
+        }
+        @keyframes heroBreath {
+            from { transform: scale(1); }
+            to { transform: scale(1.045); }
+        }
+        .hero-quiet-zone {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg,
+                rgba(254, 250, 224, 0.97) 0%,
+                rgba(254, 250, 224, 0.94) 30%,
+                rgba(254, 250, 224, 0.72) 46%,
+                rgba(254, 250, 224, 0.18) 68%,
+                rgba(254, 250, 224, 0) 85%);
+        }
+        @media (max-width: 767px) {
+            .hero-quiet-zone {
+                background: linear-gradient(180deg,
+                    rgba(254, 250, 224, 0.97) 0%,
+                    rgba(254, 250, 224, 0.92) 55%,
+                    rgba(254, 250, 224, 0.55) 100%);
+            }
+            .hero-photo { opacity: 0.5; }
+        }
+
+        /* Austin band: near-full opacity, soft center-bottom darkening under its header. No blur. */
+        .austin-band {
+            position: relative;
+            overflow: hidden;
+        }
+        .austin-photo {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 60%;
+            opacity: 0.94;
+        }
+        .austin-darken {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                rgba(42, 38, 32, 0.08) 0%,
+                rgba(42, 38, 32, 0.12) 45%,
+                rgba(42, 38, 32, 0.72) 100%);
+        }
+
+        /* Low-opacity texture atmospheres (12 to 20 percent, felt not subtle). */
+        .texture-still-life {
+            position: absolute;
+            inset: 0;
+            background-image: url('./images/img-02-still-life-texture.webp');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.13;
+            pointer-events: none;
+        }
+        .texture-austin {
+            position: absolute;
+            inset: 0;
+            background-image: url('./images/img-03-austin-band-texture.webp');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        .texture-office {
+            position: absolute;
+            inset: 0;
+            background-image: url('./images/img-01-hero-office-texture.webp');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.14;
+            pointer-events: none;
+        }
+
+        /* Closing band: Deep Harbor, once, under the empty-desk atmosphere. */
+        .closing-band {
+            position: relative;
+            background-color: var(--deep-harbor);
+            overflow: hidden;
+        }
+        .closing-photo {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2;
+        }
+
+        /* Switchboard organ: the mono section index, sitting like marginalia over the warm editorial ground. */
+        .index-label {
+            font-family: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--atx-teal-dark);
+        }
+        .index-label--muted { color: rgba(92, 83, 70, 0.75); }
+        .index-label--light { color: var(--atx-teal-light); }
+
+        /* Switchboard organ: exposed hairline grid where it clarifies. */
+        .hairline { border-color: rgba(92, 83, 70, 0.2); }
+
+        /* Switchboard organ: vertical call-rail text (desktop right edge). */
+        .rail-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 0.14em;
+        }
+
+        /* Scroll reveals: applied by JS so no-JS visitors see everything. */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.in-view {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Editorial service list rows. */
+        .service-row {
+            border-top: 1px solid rgba(92, 83, 70, 0.22);
+            transition: background-color 0.3s ease;
+        }
+        .service-row:hover {
+            background-color: rgba(254, 250, 224, 0.65);
+        }
+
+        .leonard-portrait {
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-photo { animation: none; }
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+            .service-row { transition: none; }
+        }
+
+        .concept-label {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 70;
+            background: rgba(42, 38, 32, 0.82);
+            color: #fdfcf9;
+            font-family: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+            font-size: 11px;
+            letter-spacing: 0.04em;
+            padding: 5px 10px;
+            border-bottom-right-radius: 6px;
+        }
+        .band-headline {
+            text-shadow: 0 2px 14px rgba(42, 38, 32, 0.5);
+        }
+        .plain-sans {
+            font-family: 'Public Sans', system-ui, sans-serif;
+        }
+    </style>
+</head>
+<body class="pb-24 lg:pb-0 lg:pr-12">
+    <div class="concept-label">Concept 4: Morning Light x Switchboard</div>
+    <div class="film-grain" aria-hidden="true"></div>
+
+    <!-- Call rail: desktop right edge. Warm-900 so the page keeps its single Deep Harbor band. -->
+    <aside aria-label="Call Austin Small Office Tech" class="band-dark hidden lg:flex fixed right-0 top-0 bottom-0 w-12 z-50 flex-col items-center justify-between py-8 bg-[#2a2620] border-l border-[#fefae0]/15">
+        <a href="tel:+15123182635" class="rail-text mono text-xs font-semibold text-[#fefae0] hover:text-[#f4a261]">(512) 318-2635 &middot; CALL NOW</a>
+        <p class="rail-text mono text-[0.65rem] text-[#fefae0]/70">HUMANS: MON-FRI 8AM-7PM CT</p>
+        <a href="#ai-line" class="rail-text mono text-[0.65rem] font-medium text-[#7fcec3] hover:text-[#fefae0]">TRY THE AI LINE &middot; 24/7</a>
+    </aside>
+
+    <!-- Call bar: mobile bottom, thumb reach. -->
+    <aside aria-label="Call Austin Small Office Tech" class="band-dark lg:hidden fixed bottom-0 inset-x-0 z-50 bg-[#2a2620] border-t border-[#fefae0]/15 px-4 py-3 flex items-center justify-between gap-3">
+        <div class="mono text-[0.6rem] leading-tight text-[#fefae0]/80">
+            <p>HUMANS: MON-FRI 8AM-7PM CT</p>
+            <p class="text-[#7fcec3]">AI LINE: 24/7</p>
+        </div>
+        <a href="tel:+15123182635" class="mono shrink-0 bg-[#e76f51] text-[#2a2620] font-semibold text-sm px-5 py-3 rounded-lg">Call (512) 318-2635</a>
+    </aside>
+
+    <!-- Navigation: phone visible at every scroll depth, desktop and mobile -->
+    <header class="sticky top-0 z-40 bg-[#fefae0]/95 backdrop-blur-sm border-b border-[#e9e5d6]">
+        <nav aria-label="Main" class="max-w-6xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-baseline">
+                    <span class="font-display text-xl font-bold text-[#2a2620]">ASOT</span>
+                    <span class="mono text-[0.65rem] tracking-wider text-[#5c5346] ml-2 hidden sm:inline">AUSTIN SMALL OFFICE TECH</span>
+                </a>
+                <div class="hidden md:flex items-center gap-7">
+                    <a href="./about.html" class="text-[#5c5346] hover:text-[#1e7268]">About</a>
+                    <a href="./services.html" class="text-[#5c5346] hover:text-[#1e7268]">Services</a>
+                    <a href="./faq.html" class="text-[#5c5346] hover:text-[#1e7268]">FAQ</a>
+                    <a href="./testimonials.html" class="text-[#5c5346] hover:text-[#1e7268]">Testimonials</a>
+                    <a href="tel:+15123182635" class="mono text-sm text-[#1e7268] font-semibold">(512) 318-2635</a>
+                    <a href="./contact.html" class="bg-[#2a2620] text-[#fdfcf9] px-5 py-2.5 rounded-lg hover:bg-[#3d382f] font-semibold">
+                        See If We're a Fit
+                    </a>
+                </div>
+                <div class="flex items-center gap-3 md:hidden">
+                    <a href="tel:+15123182635" class="mono text-[#1e7268] font-semibold text-xs">(512) 318-2635</a>
+                    <button id="mobile-menu-btn" class="p-2 text-[#5c5346]" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2">
+                <div class="flex flex-col gap-3">
+                    <a href="./about.html" class="text-[#5c5346] hover:text-[#1e7268] py-2">About</a>
+                    <a href="./services.html" class="text-[#5c5346] hover:text-[#1e7268] py-2">Services</a>
+                    <a href="./faq.html" class="text-[#5c5346] hover:text-[#1e7268] py-2">FAQ</a>
+                    <a href="./testimonials.html" class="text-[#5c5346] hover:text-[#1e7268] py-2">Testimonials</a>
+                    <a href="tel:+15123182635" class="mono text-[#1e7268] font-semibold py-2">(512) 318-2635</a>
+                    <a href="./contact.html" class="bg-[#2a2620] text-[#fdfcf9] px-5 py-2.5 rounded-lg hover:bg-[#3d382f] font-semibold text-center mt-2">
+                        See If We're a Fit
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 01 Hero: in the office. Backdrop with the left third quiet. -->
+        <section data-section="1" class="hero-band">
+            <img src="./images/img-01-hero-office.webp" alt="" class="hero-photo">
+            <div class="hero-quiet-zone" aria-hidden="true"></div>
+            <div class="relative max-w-6xl mx-auto px-6 pt-20 pb-24 md:pt-28 md:pb-32">
+                <div class="max-w-xl">
+                    <p class="index-label mb-5">01 / IT support for small Austin offices &middot; 1-15 people</p>
+                    <h1 class="text-4xl md:text-5xl lg:text-[3.6rem] font-bold mb-6">
+                        Everyday office tech, handled.
+                    </h1>
+                    <p class="text-lg md:text-xl text-[#3d382f] leading-relaxed mb-9 max-w-lg">
+                        Email, computers, printers, Wi-Fi, and the rest of what keeps your office moving. Built for Austin offices with 1 to 15 people. One number to call. A person picks up, Mon-Fri 8am-7pm CT.
+                    </p>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+                        <a href="./contact.html" class="inline-block bg-[#e76f51] text-[#2a2620] px-8 py-4 rounded-lg hover:bg-[#d55f42] font-semibold text-lg text-center shadow-warm">
+                            See If We're a Fit
+                        </a>
+                        <a href="tel:+15123182635" class="inline-block text-[#1e7268] font-semibold text-lg px-2 py-3 text-center hover:text-[#2a9d8f]">
+                            Or call (512) 318-2635
+                        </a>
+                    </div>
+                    <div class="mt-8 flex flex-wrap items-center gap-3">
+                        <span class="mono text-[0.65rem] tracking-wider text-[#5c5346] border border-[#5c5346]/30 px-3 py-2 rounded-md bg-[#fefae0]/70">HUMANS: MON-FRI 8AM-7PM CT</span>
+                        <span class="mono text-[0.65rem] tracking-wider text-[#1e7268] border border-[#1e7268]/40 px-3 py-2 rounded-md bg-[#fefae0]/70">AI LINE: 24/7</span>
+                        <span class="mono text-[0.65rem] tracking-wider text-[#5c5346] border border-[#5c5346]/30 px-3 py-2 rounded-md bg-[#fefae0]/70">MONTH-TO-MONTH</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02 Proof Strip: the four fast facts as an exposed data row -->
+        <section data-section="2" aria-label="Quick facts" class="relative bg-[#fdfcf9] border-b hairline">
+            <h2 class="sr-only">The facts</h2>
+            <div class="max-w-6xl mx-auto px-6">
+                <p class="index-label index-label--muted pt-6">02 / Proof strip</p>
+                <dl class="grid grid-cols-2 lg:grid-cols-4 border-x hairline mt-4 mb-10">
+                    <div class="px-5 py-7 border-b lg:border-b-0 border-r hairline">
+                        <dt class="mono text-[0.65rem] tracking-[0.18em] uppercase text-[#5c5346]/80 mb-2">Team size</dt>
+                        <dd class="font-display font-bold text-2xl md:text-3xl text-[#2a2620]">1-15</dd>
+                        <dd class="text-sm text-[#5c5346] mt-1">person offices</dd>
+                    </div>
+                    <div class="px-5 py-7 border-b lg:border-b-0 lg:border-r hairline">
+                        <dt class="mono text-[0.65rem] tracking-[0.18em] uppercase text-[#5c5346]/80 mb-2">Response</dt>
+                        <dd class="font-display font-bold text-2xl md:text-3xl text-[#2a2620]">Same day</dd>
+                        <dd class="text-sm text-[#5c5346] mt-1">urgent: within hours</dd>
+                    </div>
+                    <div class="px-5 py-7 border-r hairline">
+                        <dt class="mono text-[0.65rem] tracking-[0.18em] uppercase text-[#5c5346]/80 mb-2">Coverage</dt>
+                        <dd class="font-display font-bold text-2xl md:text-3xl text-[#2a2620]">Austin</dd>
+                        <dd class="text-sm text-[#5c5346] mt-1">local + remote teams</dd>
+                    </div>
+                    <div class="px-5 py-7">
+                        <dt class="mono text-[0.65rem] tracking-[0.18em] uppercase text-[#5c5346]/80 mb-2">Platforms</dt>
+                        <dd class="font-display font-bold text-2xl md:text-3xl text-[#2a2620]">Mac + PC</dd>
+                        <dd class="text-sm text-[#5c5346] mt-1">Google Workspace + Microsoft 365</dd>
+                    </div>
+                </dl>
+            </div>
+        </section>
+
+        <!-- 03 Rapid Answers: verdict-first, How It Works absorbed as Q-05 -->
+        <section data-section="3" class="relative bg-[#fefae0] py-16 md:py-20 px-6 overflow-hidden">
+            <div class="texture-office" aria-hidden="true"></div>
+            <div class="relative max-w-6xl mx-auto">
+                <div class="flex items-baseline justify-between gap-4 mb-4">
+                    <p class="index-label">03 / Rapid answers</p>
+                    <a href="./faq.html" class="mono text-xs tracking-wider text-[#1e7268] hover:text-[#2a2620] font-medium shrink-0">FULL FAQ &rarr;</a>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-10">The short version</h2>
+
+                <div class="grid md:grid-cols-2 border-t border-l hairline">
+                    <div class="p-7 md:p-8 border-b border-r hairline bg-[#fdfcf9]/60" data-reveal>
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-3">Q-01 &middot; CONTRACTS</p>
+                        <h3 class="text-lg font-semibold mb-2">Do you require long-term contracts?</h3>
+                        <p class="text-[#5c5346] leading-relaxed"><strong class="text-[#2a2620]">Nope. Month-to-month.</strong> We'd rather earn your business than lock you in. One-time projects work too, if you just need help with something specific.</p>
+                    </div>
+                    <div class="p-7 md:p-8 border-b border-r hairline bg-[#fdfcf9]/60" data-reveal>
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-3">Q-02 &middot; COST</p>
+                        <h3 class="text-lg font-semibold mb-2">How much does it cost?</h3>
+                        <p class="text-[#5c5346] leading-relaxed"><strong class="text-[#2a2620]">A flat monthly rate for most offices.</strong> It runs a fraction of a part-time employee. Clear quote after one 15-minute call. No hidden fees, no surprise charges.</p>
+                    </div>
+                    <div class="p-7 md:p-8 border-b border-r hairline bg-[#fdfcf9]/60" data-reveal>
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-3">Q-03 &middot; RESPONSE TIME</p>
+                        <h3 class="text-lg font-semibold mb-2">How fast do you respond?</h3>
+                        <p class="text-[#5c5346] leading-relaxed"><strong class="text-[#2a2620]">Urgent issues: within hours, usually faster.</strong> Non-urgent requests get handled the same business day. And yes, we answer our phone.</p>
+                    </div>
+                    <div class="p-7 md:p-8 border-b border-r hairline bg-[#fdfcf9]/60" data-reveal>
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-3">Q-04 &middot; HOURS</p>
+                        <h3 class="text-lg font-semibold mb-2">What are your hours?</h3>
+                        <p class="text-[#5c5346] leading-relaxed"><strong class="text-[#2a2620]">Humans: Mon-Fri 8am-7pm CT.</strong> The AI line answers 24/7. Those are two different things, and we keep them separate on purpose.</p>
+                    </div>
+                    <div class="p-7 md:p-8 border-b border-r hairline bg-[#fdfcf9]/60 md:col-span-2" data-reveal>
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-3">Q-05 &middot; GETTING STARTED</p>
+                        <h3 class="text-lg font-semibold mb-5">How do we start?</h3>
+                        <div class="grid sm:grid-cols-3 gap-6">
+                            <div class="border-l-2 border-[#2a9d8f] pl-5 py-1">
+                                <p class="mono text-xs text-[#1e7268] mb-2">STEP 01</p>
+                                <p class="font-semibold text-[#2a2620] mb-1">Quick chat</p>
+                                <p class="text-sm text-[#5c5346] leading-relaxed">A 15-minute call about your office, your tech, and whether we're a good fit.</p>
+                            </div>
+                            <div class="border-l-2 border-[#2a9d8f] pl-5 py-1">
+                                <p class="mono text-xs text-[#1e7268] mb-2">STEP 02</p>
+                                <p class="font-semibold text-[#2a2620] mb-1">Simple proposal</p>
+                                <p class="text-sm text-[#5c5346] leading-relaxed">A clear, no-jargon proposal with exactly what you'll get and what it costs.</p>
+                            </div>
+                            <div class="border-l-2 border-[#2a9d8f] pl-5 py-1">
+                                <p class="mono text-xs text-[#1e7268] mb-2">STEP 03</p>
+                                <p class="font-semibold text-[#2a2620] mb-1">We're on it</p>
+                                <p class="text-sm text-[#5c5346] leading-relaxed">You've got a tech team. Call, text, or email. Most offices are fully onboarded within a week or two.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 The Middle Path, told as a story in serif -->
+        <section data-section="4" class="relative bg-[#fdfcf9] py-20 md:py-28 px-6">
+            <div class="relative max-w-6xl mx-auto grid md:grid-cols-12 gap-10 md:gap-14">
+                <div class="md:col-span-4" data-reveal>
+                    <p class="index-label mb-4">04 / The middle path</p>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">The middle path</h2>
+                    <p class="font-story italic text-xl text-[#3d382f] leading-relaxed border-l-2 border-[#2a9d8f] pl-5">
+                        "We keep the promise small enough to keep: we answer the phone, we show up, and we stay."
+                    </p>
+                </div>
+                <div class="md:col-span-7 md:col-start-6 font-story text-lg md:text-xl text-[#3d382f] leading-loose space-y-6" data-reveal>
+                    <p>
+                        Every small office we meet has tried one of three things. Some hired a big managed-services firm and got a ticket queue, a 40-page agreement, and a bill sized for a company ten times theirs. Some called a break/fix tech who solved one problem and vanished. And most handed the whole mess to whichever staff member seemed good with computers. The accidental IT person, resetting passwords between the tasks they were hired to do.
+                    </p>
+                    <p>
+                        We built ASOT to be the middle ground: a local Austin team on a month-to-month plan, one number to call, and people who know your setup because they set it up. We'd rather have 50 clients who love us than 500 who barely know our name.
+                    </p>
+                    <p class="plain-sans font-semibold text-base text-[#2a2620] tracking-wide">
+                        No overkill. No disappearing acts. No drafting your office manager into a second job.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 What We Handle: 2x3 editorial list with the still-life inset -->
+        <section data-section="5" class="relative bg-[#fefae0] py-20 md:py-28 px-6">
+            <div class="max-w-6xl mx-auto grid lg:grid-cols-12 gap-12 lg:gap-16">
+                <div class="lg:col-span-4" data-reveal>
+                    <p class="index-label mb-4">05 / What we handle</p>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-5">What we handle</h2>
+                    <p class="text-[#5c5346] leading-relaxed mb-8">
+                        Day-to-day office technology: the stuff that interrupts your work when it breaks, and the improvements that help you work smarter.
+                    </p>
+                    <img src="./images/img-02-still-life.webp" alt="Laptop, desk phone, small printer, and sticky notes arranged on a warm wood desk" class="rounded-xl shadow-warm w-full mb-4">
+                    <p class="text-sm text-[#5c5346]">The whole job, more or less: the machines on your desks and the accounts behind them.</p>
+                    <a href="./services.html" class="mono inline-block mt-6 text-xs tracking-wider text-[#1e7268] font-medium hover:text-[#2a2620]">ALL SERVICES &rarr;</a>
+                </div>
+                <div class="lg:col-span-8">
+                    <div class="grid sm:grid-cols-2">
+                        <a href="./services.html#people-access" class="service-row block p-6 md:p-7 group" data-reveal>
+                            <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-2">S-01</p>
+                            <h3 class="text-xl font-semibold mb-2 group-hover:text-[#1e7268]">People &amp; Access</h3>
+                            <p class="text-[#5c5346] text-sm leading-relaxed">New hires set up before day one, departures offboarded the same week. Email accounts, shared drives, permissions, password resets.</p>
+                        </a>
+                        <a href="./services.html#office-tools" class="service-row block p-6 md:p-7 group" data-reveal>
+                            <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-2">S-02</p>
+                            <h3 class="text-xl font-semibold mb-2 group-hover:text-[#1e7268]">Office Tools &amp; Hardware</h3>
+                            <p class="text-[#5c5346] text-sm leading-relaxed">Google Workspace and Microsoft 365, printers, phone systems, computer purchases, updates, and the troubleshooting in between.</p>
+                        </a>
+                        <a href="./services.html#security" class="service-row block p-6 md:p-7 group" data-reveal>
+                            <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-2">S-03</p>
+                            <h3 class="text-xl font-semibold mb-2 group-hover:text-[#1e7268]">Security &amp; Compliance</h3>
+                            <p class="text-[#5c5346] text-sm leading-relaxed">Password managers, 2FA on everything, backups that get tested instead of assumed. HIPAA-friendly tool setup for practices that need it.</p>
+                        </a>
+                        <a href="./services.html#vendor" class="service-row block p-6 md:p-7 group" data-reveal>
+                            <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-2">S-04</p>
+                            <h3 class="text-xl font-semibold mb-2 group-hover:text-[#1e7268]">Vendor Coordination</h3>
+                            <p class="text-[#5c5346] text-sm leading-relaxed mb-4">Internet down? Copier jammed? We make the calls, sit on hold, and get it fixed. You stay with your clients.</p>
+                            <figure class="flex items-center gap-3">
+                                <img src="./images/img-05-hold-music.webp" alt="Desk phone handset resting off the hook beside a cooling cup of coffee and a notepad" class="w-20 h-20 rounded-lg object-cover shadow-warm flex-shrink-0">
+                                <figcaption class="text-xs text-[#5c5346] italic">We handle the hold music.</figcaption>
+                            </figure>
+                        </a>
+                        <a href="./services.html#custom-solutions" class="service-row block p-6 md:p-7 group" data-reveal>
+                            <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-2">S-05</p>
+                            <h3 class="text-xl font-semibold mb-2 group-hover:text-[#1e7268]">Custom Solutions</h3>
+                            <p class="text-[#5c5346] text-sm leading-relaxed">App integrations, workflow automations, and small tools built around how your office works.</p>
+                        </a>
+                        <a href="./services.html#ai-voice" class="service-row block p-6 md:p-7 group" data-reveal>
+                            <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-2">S-06</p>
+                            <div class="flex items-center gap-2 mb-2">
+                                <h3 class="text-xl font-semibold group-hover:text-[#1e7268]">AI Voice Agents</h3>
+                                <span class="mono bg-[#f4a261] text-[#2a2620] text-[0.6rem] tracking-wider font-semibold px-1.5 py-0.5 rounded">24/7</span>
+                            </div>
+                            <p class="text-[#5c5346] text-sm leading-relaxed">AI answers when your team can't, books appointments, and takes messages around the clock. Call our number after hours and you'll hear ours.</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06 Austin band into Built for Offices Like Yours -->
+        <section data-section="6" class="bg-[#fefae0]">
+            <div class="austin-band h-[46vh] min-h-[320px] md:h-[54vh]">
+                <img src="./images/img-03-austin-band.webp" alt="Small storefront offices under live oaks on a sunlit Austin street" class="austin-photo">
+                <div class="austin-darken" aria-hidden="true"></div>
+                <div class="relative h-full max-w-6xl mx-auto px-6 flex flex-col items-center justify-end pb-10 md:pb-14">
+                    <p class="index-label index-label--light mb-3">06 / Built for offices like yours</p>
+                    <h2 class="band-headline text-3xl md:text-5xl font-bold text-[#fdfcf9] text-center">
+                        Built for offices like yours
+                    </h2>
+                </div>
+            </div>
+            <div class="py-16 md:py-20 px-6">
+                <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-10 md:gap-14">
+                    <div class="md:col-span-4" data-reveal>
+                        <p class="text-[#3d382f] text-lg leading-relaxed mb-6">
+                            Professional service firms with 1 to 15 people. In-office, remote, or hybrid. No IT department needed.
+                        </p>
+                        <p class="text-[#5c5346] leading-relaxed">
+                            Therapy and mental health practices are where we've done the most work: HIPAA-friendly tools, 2FA on everything, backups that get tested. To be clear, we're not HIPAA compliance consultants. For a full audit you want a specialist, and we'll point you to one.
+                        </p>
+                    </div>
+                    <div class="md:col-span-8">
+                        <ul class="grid sm:grid-cols-2 gap-x-10">
+                            <li class="border-t border-[#d4cfc2] py-5" data-reveal>
+                                <h3 class="font-semibold text-lg text-[#2a2620] mb-1">Therapy &amp; Mental Health</h3>
+                                <p class="text-sm text-[#5c5346]">Practice management software, client notes, HIPAA-friendly setups. Our deepest bench.</p>
+                            </li>
+                            <li class="border-t border-[#d4cfc2] py-5" data-reveal>
+                                <h3 class="font-semibold text-lg text-[#2a2620] mb-1">Law Offices</h3>
+                                <p class="text-sm text-[#5c5346]">Case files, document management, and email that has to work during filing week.</p>
+                            </li>
+                            <li class="border-t border-[#d4cfc2] py-5" data-reveal>
+                                <h3 class="font-semibold text-lg text-[#2a2620] mb-1">Accounting &amp; CPA Firms</h3>
+                                <p class="text-sm text-[#5c5346]">Secure client portals and machines that hold up through tax season.</p>
+                            </li>
+                            <li class="border-t border-[#d4cfc2] py-5" data-reveal>
+                                <h3 class="font-semibold text-lg text-[#2a2620] mb-1">Architecture &amp; Design</h3>
+                                <p class="text-sm text-[#5c5346]">Big files, big monitors, and backups that keep pace with both.</p>
+                            </li>
+                            <li class="border-t border-[#d4cfc2] py-5" data-reveal>
+                                <h3 class="font-semibold text-lg text-[#2a2620] mb-1">Real Estate Offices</h3>
+                                <p class="text-sm text-[#5c5346]">E-signatures, listing tools, and a team that's half in the field on any given day.</p>
+                            </li>
+                            <li class="border-t border-[#d4cfc2] py-5" data-reveal>
+                                <h3 class="font-semibold text-lg text-[#2a2620] mb-1">Medical &amp; Dental Admin</h3>
+                                <p class="text-sm text-[#5c5346]">Front-desk systems and scheduling that can't go down mid-morning.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07 Anchor Testimonial: the emotional peak -->
+        <section data-section="7" class="relative bg-[#e9e5d6] py-20 md:py-28 px-6 overflow-hidden">
+            <div class="texture-still-life" aria-hidden="true"></div>
+            <div class="relative max-w-5xl mx-auto">
+                <p class="index-label mb-10" data-reveal>07 / On the record &middot; Psychiatry Austin</p>
+                <div class="grid md:grid-cols-12 gap-10 md:gap-14 items-center">
+                    <div class="md:col-span-4" data-reveal>
+                        <img src="./images/img-04-leonard.webp" alt="Leonard Weiss, M.D." class="leonard-portrait w-full max-w-[280px] mx-auto md:mx-0 rounded-xl shadow-warm-lg">
+                    </div>
+                    <figure class="md:col-span-8" data-reveal>
+                        <blockquote class="font-story text-xl md:text-2xl text-[#2a2620] leading-relaxed mb-8">
+                            "Before ASOT, our office was constantly dealing with tech headaches. Someone's email wouldn't sync, the printer would go offline during busy days, and I was always the one everyone turned to for help, which took time away from my patients. Now I have one number to call, and they handle everything. The peace of mind alone is worth it. I can focus on medicine instead of troubleshooting Wi-Fi."
+                        </blockquote>
+                        <figcaption class="flex items-center justify-between gap-6 flex-wrap">
+                            <div>
+                                <p class="font-semibold text-[#2a2620]">Leonard Weiss, M.D.</p>
+                                <p class="text-[#5c5346] text-sm">Psychiatrist &amp; Practice Owner, Psychiatry Austin</p>
+                            </div>
+                            <img src="./images/psychiatry-austin-logo.svg" alt="Psychiatry Austin" class="h-10 w-auto">
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- 08 Honest Scope: stated flat, with the exposed data list -->
+        <section data-section="8" class="relative bg-[#f0ebe0] py-16 md:py-20 px-6 overflow-hidden">
+            <div class="texture-austin" aria-hidden="true"></div>
+            <div class="relative max-w-6xl mx-auto grid md:grid-cols-12 gap-10 md:gap-14">
+                <div class="md:col-span-5" data-reveal>
+                    <p class="index-label mb-4">08 / Honest scope</p>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">What we don't do</h2>
+                    <p class="text-[#3d382f] leading-relaxed mb-3">
+                        Stated as plainly as what we do. If your situation lands on this list, we'll say so on the first call and point you to someone good.
+                    </p>
+                    <p class="text-[#5c5346] leading-relaxed">
+                        Not sure where your setup lands? Call anyway. We'll tell you straight.
+                    </p>
+                </div>
+                <div class="md:col-span-7 self-center" data-reveal>
+                    <ul class="grid sm:grid-cols-2 gap-x-8 gap-y-1">
+                        <li class="mono text-xs tracking-wider text-[#2a2620] py-3 border-b hairline">NO ON-SITE SERVER INFRASTRUCTURE</li>
+                        <li class="mono text-xs tracking-wider text-[#2a2620] py-3 border-b hairline">NO ENTERPRISE COMPLIANCE AUDITS (SOC2)</li>
+                        <li class="mono text-xs tracking-wider text-[#2a2620] py-3 border-b hairline">NO POS SYSTEMS</li>
+                        <li class="mono text-xs tracking-wider text-[#2a2620] py-3 border-b hairline">NO 24/7 HUMAN SUPPORT</li>
+                        <li class="mono text-xs tracking-wider text-[#2a2620] py-3 border-b hairline sm:col-span-2">NO HIPAA COMPLIANCE CONSULTING (HIPAA-FRIENDLY SETUP, YES)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 09 The AI line: the quiet modern coda, with the who-answers-when card -->
+        <section data-section="9" id="ai-line" class="relative bg-[#fdfcf9] py-16 md:py-24 px-6">
+            <div class="max-w-6xl mx-auto grid lg:grid-cols-12 gap-10 lg:gap-14">
+                <div class="lg:col-span-7" data-reveal>
+                    <p class="index-label mb-4">09 / Try the AI line &middot; Same number, any hour</p>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-5">After hours, our phone still answers</h2>
+                    <p class="text-[#5c5346] leading-relaxed mb-4 max-w-xl">
+                        Human support runs Mon-Fri 8am-7pm CT. Outside those hours, an AI voice agent picks up our line: it answers questions, takes messages, and books calls. Sounds natural, not like a robot. The AI line is the only part of ASOT that works 24/7.
+                    </p>
+                    <p class="text-[#3d382f] leading-relaxed max-w-xl">
+                        Hear it yourself. Call <a href="tel:+15123182635" class="text-[#1e7268] font-semibold hover:text-[#2a9d8f]">(512) 318-2635</a> any evening. We set up the same thing for offices that keep missing calls.
+                    </p>
+                </div>
+                <div class="lg:col-span-5" data-reveal>
+                    <div class="rounded-xl border hairline bg-[#fefae0] shadow-warm p-7 h-full flex flex-col justify-center gap-5">
+                        <p class="mono text-[0.65rem] tracking-[0.18em] uppercase text-[#5c5346]/80">Who answers when</p>
+                        <div class="flex items-baseline justify-between gap-4 border-b hairline pb-4">
+                            <p class="font-display font-semibold text-[#2a2620]">A person</p>
+                            <p class="mono text-xs text-[#1e7268]">MON-FRI 8AM-7PM CT</p>
+                        </div>
+                        <div class="flex items-baseline justify-between gap-4 border-b hairline pb-4">
+                            <p class="font-display font-semibold text-[#2a2620]">The AI line</p>
+                            <p class="mono text-xs text-[#1e7268]">24/7, INCLUDING HOLIDAYS</p>
+                        </div>
+                        <p class="text-sm text-[#5c5346] leading-relaxed">One number, two answerers. Human support runs business hours; the AI line covers everything outside them. We keep that distinction plain because trust depends on it.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Closing CTA: the relieved empty desk, Deep Harbor once -->
+        <section data-section="10" class="closing-band band-dark py-24 md:py-32 px-6">
+            <img src="./images/img-06-cta-atmosphere.webp" alt="" class="closing-photo">
+            <div class="relative max-w-3xl mx-auto text-center">
+                <p class="mono text-[0.7rem] tracking-[0.2em] uppercase text-[#7fcec3] mb-5">No pressure, no obligation, no jargon</p>
+                <h2 class="text-3xl md:text-5xl font-bold text-[#fdfcf9] mb-6">Let's talk</h2>
+                <p class="text-[#e8f5f3] text-lg leading-relaxed mb-10 max-w-xl mx-auto">
+                    A 15-minute call about your office and your tech. If we're a fit, most offices are fully onboarded within a week or two. If we're not, we'll say so.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+                    <a href="./contact.html" class="inline-block bg-[#e76f51] text-[#2a2620] px-8 py-4 rounded-lg hover:bg-[#d55f42] font-semibold text-lg shadow-warm-lg">
+                        See If We're a Fit
+                    </a>
+                    <a href="tel:+15123182635" class="mono inline-block text-[#fdfcf9] font-semibold text-lg px-2 py-3 hover:text-[#e8f5f3] underline underline-offset-4 decoration-[#2a9d8f]">
+                        (512) 318-2635
+                    </a>
+                </div>
+                <div class="flex flex-wrap justify-center gap-x-8 gap-y-2 mono text-[0.65rem] tracking-wider text-[#e8f5f3]/80">
+                    <p>HUMANS: MON-FRI 8AM-7PM CT</p>
+                    <p>AI LINE: 24/7</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="band-dark bg-[#2a2620] py-12 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <span class="font-display text-white font-bold text-lg">ASOT</span>
+                    <p class="mono text-[0.65rem] tracking-wider text-[#f0ebe0]/80 mt-1">AUSTIN SMALL OFFICE TECH</p>
+                    <p class="text-[#d4cfc2] text-sm mt-4 max-w-sm leading-relaxed">
+                        IT support for small Austin offices with 1 to 15 people. Local team, clear communication, same-day response. One number to call. We pick up.
+                    </p>
+                </div>
+                <div>
+                    <p class="mono text-[0.65rem] tracking-[0.18em] text-[#d4cfc2]/70 mb-3">PAGES</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="./about.html" class="text-[#d4cfc2] hover:text-white text-sm">About</a>
+                        <a href="./services.html" class="text-[#d4cfc2] hover:text-white text-sm">Services</a>
+                        <a href="./faq.html" class="text-[#d4cfc2] hover:text-white text-sm">FAQ</a>
+                        <a href="./testimonials.html" class="text-[#d4cfc2] hover:text-white text-sm">Testimonials</a>
+                        <a href="./contact.html" class="text-[#d4cfc2] hover:text-white text-sm">Contact</a>
+                    </div>
+                </div>
+                <div>
+                    <p class="mono text-[0.65rem] tracking-[0.18em] text-[#d4cfc2]/70 mb-3">ONE NUMBER</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="tel:+15123182635" class="mono text-[#fdfcf9] hover:text-[#f4a261] text-sm font-semibold">(512) 318-2635</a>
+                        <a href="mailto:hello@austinsmallofficetech.com" class="text-[#d4cfc2] hover:text-white text-sm break-all">hello@austinsmallofficetech.com</a>
+                        <p class="text-[#b8b0a0] text-sm">Austin, TX</p>
+                        <p class="mono text-[0.65rem] tracking-wider text-[#b8b0a0]">MON-FRI 8AM-7PM CT</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-[#3d382f] pt-8 text-center">
+                <p class="text-[#9c937f] text-sm">&copy; 2026 Austin Small Office Tech. IT support for small Austin offices and remote teams.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        var menuBtn = document.getElementById('mobile-menu-btn');
+        var menu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', function () {
+            var open = menu.classList.toggle('hidden') === false;
+            menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+
+        // Scroll reveals: applied via JS so content stays visible without it.
+        (function () {
+            var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var targets = document.querySelectorAll('[data-reveal]');
+            if (reduced || !('IntersectionObserver' in window)) { return; }
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+            targets.forEach(function (el) {
+                el.classList.add('reveal');
+                io.observe(el);
+            });
+        })();
+    </script>
+</body>
+</html>
