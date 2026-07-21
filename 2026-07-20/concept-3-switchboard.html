@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Austin Small Office Tech | One Number to Call. We Pick Up.</title>
+    <meta name="description" content="IT support for small Austin offices with 1 to 15 people. One number to call: (512) 318-2635. A person answers Mon-Fri 8am-7pm CT. The AI line answers 24/7.">
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --harbor: #264653;
+            --teal: #2a9d8f;
+            --teal-dark: #1e7268;
+            --teal-light: #e8f5f3;
+            --orange: #e76f51;
+            --cream: #fefae0;
+            --sand: #e9e5d6;
+            --warm-50: #fdfcf9;
+            --warm-200: #f0ebe0;
+            --warm-700: #5c5346;
+            --warm-900: #2a2620;
+        }
+
+        @layer base {
+            body {
+                font-family: 'Inter', system-ui, sans-serif;
+                color: var(--warm-700);
+                background: var(--warm-50);
+            }
+            h1, h2, h3 {
+                font-family: 'Sora', 'Inter', system-ui, sans-serif;
+                color: var(--warm-900);
+            }
+            a:focus-visible,
+            button:focus-visible {
+                outline: 3px solid var(--teal);
+                outline-offset: 3px;
+                border-radius: 2px;
+            }
+            .band-dark a:focus-visible,
+            .band-dark button:focus-visible {
+                outline-color: var(--teal);
+                outline-offset: 4px;
+            }
+        }
+
+        .font-display { font-family: 'Sora', 'Inter', system-ui, sans-serif; }
+        .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+
+        /* Grain texture: inline SVG feTurbulence, dark bands only */
+        .grain { position: relative; }
+        .grain::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.15;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)'/%3E%3C/svg%3E");
+        }
+        .grain > * { position: relative; }
+
+        /* Vertical call rail text (desktop right edge) */
+        .rail-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 0.14em;
+        }
+
+        /* Concept annotation chrome (not part of the final site) */
+        .concept-label {
+            position: fixed;
+            top: 0.75rem;
+            left: 0.75rem;
+            z-index: 60;
+            background: rgba(42, 38, 32, 0.82);
+            color: #fdfcf9;
+            font-family: 'IBM Plex Mono', ui-monospace, monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.06em;
+            padding: 0.35rem 0.6rem;
+            border-radius: 3px;
+            pointer-events: none;
+        }
+        .section-marker {
+            position: absolute;
+            bottom: 0.6rem;
+            right: 0.9rem;
+            z-index: 5;
+            font-family: 'IBM Plex Mono', ui-monospace, monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            opacity: 0.45;
+            color: var(--warm-700);
+            pointer-events: none;
+        }
+        .section-marker--light { color: var(--teal-light); opacity: 0.55; }
+
+        /* Scroll reveals: motion only when the visitor allows it */
+        @media (prefers-reduced-motion: no-preference) {
+            .rv {
+                opacity: 0;
+                transform: translateY(14px);
+                transition: opacity 0.55s ease, transform 0.55s ease;
+            }
+            .rv.rv-in { opacity: 1; transform: none; }
+            .pulse-dot { animation: pulse 2.6s ease-in-out infinite; }
+            @keyframes pulse {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.35; }
+            }
+            .hot-link { transition: opacity 0.2s ease, letter-spacing 0.3s ease; }
+            .hot-link:hover { opacity: 0.85; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .rv { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body class="pb-24 lg:pb-0 lg:pr-12">
+
+    <div class="concept-label">Concept 3: Switchboard</div>
+
+    <!-- ============ CALL RAIL: desktop right edge ============ -->
+    <aside aria-label="Call Austin Small Office Tech" class="band-dark hidden lg:flex fixed right-0 top-0 bottom-0 w-12 z-50 flex-col items-center justify-between py-8 bg-[#264653] border-l border-[#e8f5f3]/15">
+        <a href="tel:+15123182635" class="rail-text mono text-xs font-semibold text-[#e8f5f3] hover:text-[#2a9d8f]">(512) 318-2635 &middot; CALL NOW</a>
+        <p class="rail-text mono text-[0.65rem] text-[#e8f5f3]/70">HUMANS: MON-FRI 8AM-7PM CT</p>
+        <a href="#ai-line" class="rail-text mono text-[0.65rem] font-medium text-[#2a9d8f] hover:text-[#e8f5f3]">TRY THE AI LINE &middot; 24/7</a>
+    </aside>
+
+    <!-- ============ CALL BAR: mobile bottom, thumb reach ============ -->
+    <aside aria-label="Call Austin Small Office Tech" class="band-dark lg:hidden fixed bottom-0 inset-x-0 z-50 bg-[#264653] border-t border-[#e8f5f3]/15 px-4 py-3 flex items-center justify-between gap-3">
+        <div class="mono text-[0.6rem] leading-tight text-[#e8f5f3]/80">
+            <p>HUMANS: MON-FRI 8AM-7PM CT</p>
+            <p class="text-[#2a9d8f]">AI LINE: 24/7</p>
+        </div>
+        <a href="tel:+15123182635" class="mono shrink-0 bg-[#e76f51] text-[#2a2620] font-semibold text-sm px-5 py-3 rounded-sm">Call (512) 318-2635</a>
+    </aside>
+
+    <!-- ============ NAV ============ -->
+    <header class="band-dark fixed top-0 inset-x-0 z-40 bg-[#264653]/95 backdrop-blur-sm border-b border-[#e8f5f3]/15">
+        <nav aria-label="Main" class="max-w-6xl mx-auto px-6 lg:pr-16 py-4">
+            <div class="flex items-center justify-between">
+                <a href="./index.html" class="flex items-baseline gap-2">
+                    <span class="font-display text-xl font-bold text-[#fdfcf9]">ASOT</span>
+                    <span class="mono text-[0.65rem] text-[#e8f5f3]/70 hidden sm:inline tracking-wider">AUSTIN SMALL OFFICE TECH</span>
+                </a>
+                <div class="hidden md:flex items-center gap-7">
+                    <a href="./about.html" class="text-sm text-[#e8f5f3]/90 hover:text-[#fdfcf9]">About</a>
+                    <a href="./services.html" class="text-sm text-[#e8f5f3]/90 hover:text-[#fdfcf9]">Services</a>
+                    <a href="./testimonials.html" class="text-sm text-[#e8f5f3]/90 hover:text-[#fdfcf9]">Testimonials</a>
+                    <a href="./faq.html" class="text-sm text-[#e8f5f3]/90 hover:text-[#fdfcf9]">FAQ</a>
+                    <a href="tel:+15123182635" class="mono text-sm font-semibold text-[#e8f5f3] hover:text-[#2a9d8f]">(512) 318-2635</a>
+                    <a href="./contact.html" class="border-2 border-[#2a9d8f] text-[#fdfcf9] text-sm font-semibold px-4 py-2 rounded-sm hover:bg-[#2a9d8f]/20">See If We're a Fit</a>
+                </div>
+                <div class="flex items-center gap-3 md:hidden">
+                    <a href="tel:+15123182635" class="mono text-xs font-semibold text-[#e8f5f3]">(512) 318-2635</a>
+                    <button id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" class="p-2 text-[#e8f5f3]">
+                        <span class="sr-only">Open menu</span>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2">
+                <div class="flex flex-col gap-1">
+                    <a href="./about.html" class="text-[#e8f5f3]/90 hover:text-[#fdfcf9] py-2">About</a>
+                    <a href="./services.html" class="text-[#e8f5f3]/90 hover:text-[#fdfcf9] py-2">Services</a>
+                    <a href="./testimonials.html" class="text-[#e8f5f3]/90 hover:text-[#fdfcf9] py-2">Testimonials</a>
+                    <a href="./faq.html" class="text-[#e8f5f3]/90 hover:text-[#fdfcf9] py-2">FAQ</a>
+                    <a href="./contact.html" class="border-2 border-[#2a9d8f] text-[#fdfcf9] font-semibold px-4 py-2.5 rounded-sm text-center mt-2">See If We're a Fit</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ============ 01 HERO ============ -->
+        <section data-section="1" class="band-dark grain relative bg-[#264653] pt-32 pb-16 px-6 overflow-hidden">
+            <span class="section-marker section-marker--light">01 | Hero</span>
+            <div class="max-w-6xl mx-auto">
+                <p class="mono text-xs tracking-[0.2em] text-[#2a9d8f] mb-8">IT SUPPORT FOR SMALL AUSTIN OFFICES &middot; 1-15 PEOPLE</p>
+                <h1 class="font-display font-extrabold text-[#fdfcf9] leading-[1.02] tracking-tight mb-10" style="font-size: clamp(2.75rem, 7vw, 5.5rem);">
+                    One number to call.<br>We pick up.
+                </h1>
+
+                <!-- The number as typographic furniture: headline scale, the one hot element -->
+                <a href="tel:+15123182635" class="hot-link mono font-semibold text-[#e76f51] block leading-none tracking-tight mb-10 break-words" style="font-size: clamp(2.25rem, 8.5vw, 6.5rem);">
+                    (512) 318-2635
+                </a>
+
+                <div class="grid lg:grid-cols-12 gap-8 items-end">
+                    <p class="lg:col-span-6 text-lg text-[#e8f5f3]/90 leading-relaxed max-w-xl">
+                        Email, computers, printers, and the everyday tech that keeps your office moving. Local Austin team, not a call center. Same-day response, month-to-month, Mac and PC.
+                    </p>
+                    <div class="lg:col-span-6 flex flex-wrap items-center gap-4 lg:justify-end">
+                        <span class="mono text-[0.65rem] tracking-wider text-[#e8f5f3]/80 border border-[#e8f5f3]/25 px-3 py-2 rounded-sm">HUMANS: MON-FRI 8AM-7PM CT</span>
+                        <span class="mono text-[0.65rem] tracking-wider text-[#2a9d8f] border border-[#2a9d8f]/50 px-3 py-2 rounded-sm">AI LINE: 24/7</span>
+                        <a href="./contact.html" class="border-2 border-[#2a9d8f] text-[#fdfcf9] font-semibold px-6 py-3 rounded-sm hover:bg-[#2a9d8f]/20">See If We're a Fit</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 02 PROOF STRIP: data row ============ -->
+        <section data-section="2" class="relative bg-[#fefae0] px-6 border-b border-[#5c5346]/15">
+            <span class="section-marker">02 | Proof Strip</span>
+            <h2 class="sr-only">The facts</h2>
+            <div class="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 border-x border-[#5c5346]/15">
+                <div class="rv px-5 py-8 border-b lg:border-b-0 border-r border-[#5c5346]/15">
+                    <p class="mono text-[0.65rem] tracking-[0.18em] text-[#5c5346]/70 mb-2">TEAM SIZE</p>
+                    <p class="font-display text-3xl font-bold text-[#2a2620]">1-15</p>
+                    <p class="text-sm text-[#5c5346] mt-1">person offices</p>
+                </div>
+                <div class="rv px-5 py-8 border-b lg:border-b-0 lg:border-r border-[#5c5346]/15">
+                    <p class="mono text-[0.65rem] tracking-[0.18em] text-[#5c5346]/70 mb-2">RESPONSE</p>
+                    <p class="font-display text-3xl font-bold text-[#2a2620]">Same day</p>
+                    <p class="text-sm text-[#5c5346] mt-1">urgent: within hours</p>
+                </div>
+                <div class="rv px-5 py-8 border-r border-[#5c5346]/15">
+                    <p class="mono text-[0.65rem] tracking-[0.18em] text-[#5c5346]/70 mb-2">COVERAGE</p>
+                    <p class="font-display text-3xl font-bold text-[#2a2620]">Austin</p>
+                    <p class="text-sm text-[#5c5346] mt-1">local + remote teams</p>
+                </div>
+                <div class="rv px-5 py-8">
+                    <p class="mono text-[0.65rem] tracking-[0.18em] text-[#5c5346]/70 mb-2">PLATFORMS</p>
+                    <p class="font-display text-3xl font-bold text-[#2a2620]">Mac + PC</p>
+                    <p class="text-sm text-[#5c5346] mt-1">Google Workspace + Microsoft 365</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 03 RAPID ANSWERS (incl. How It Works as Q-05) ============ -->
+        <section data-section="3" class="relative bg-[#e9e5d6] py-20 px-6">
+            <span class="section-marker">03 | Rapid Answers</span>
+            <div class="max-w-6xl mx-auto">
+                <div class="flex items-baseline justify-between gap-4 mb-12">
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-[#2a2620]">Rapid answers</h2>
+                    <a href="./faq.html" class="mono text-xs tracking-wider text-[#1e7268] hover:text-[#2a2620] font-medium shrink-0">FULL FAQ &rarr;</a>
+                </div>
+
+                <div class="grid md:grid-cols-2 border-t border-l border-[#5c5346]/20">
+                    <div class="rv p-8 border-b border-r border-[#5c5346]/20 bg-[#fdfcf9]/40">
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-3">Q-01 &middot; CONTRACTS</p>
+                        <h3 class="font-display text-lg font-bold text-[#2a2620] mb-3">Do you require long-term contracts?</h3>
+                        <p class="leading-relaxed"><strong class="text-[#2a2620]">Nope. Month-to-month.</strong> We'd rather earn your business than lock you in. One-time projects work too, if you just need help with something specific.</p>
+                    </div>
+                    <div class="rv p-8 border-b border-r border-[#5c5346]/20 bg-[#fdfcf9]/40">
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-3">Q-02 &middot; COST</p>
+                        <h3 class="font-display text-lg font-bold text-[#2a2620] mb-3">How much does it cost?</h3>
+                        <p class="leading-relaxed"><strong class="text-[#2a2620]">A flat monthly rate for most offices.</strong> It runs a fraction of a part-time employee. Clear quote after one 15-minute call. No hidden fees, no surprise charges.</p>
+                    </div>
+                    <div class="rv p-8 border-b border-r border-[#5c5346]/20 bg-[#fdfcf9]/40">
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-3">Q-03 &middot; RESPONSE TIME</p>
+                        <h3 class="font-display text-lg font-bold text-[#2a2620] mb-3">How fast do you respond?</h3>
+                        <p class="leading-relaxed"><strong class="text-[#2a2620]">Urgent issues: within hours, usually faster.</strong> Non-urgent requests get handled the same business day. And yes, we answer our phone.</p>
+                    </div>
+                    <div class="rv p-8 border-b border-r border-[#5c5346]/20 bg-[#fdfcf9]/40">
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-3">Q-04 &middot; HOURS</p>
+                        <h3 class="font-display text-lg font-bold text-[#2a2620] mb-3">What are your hours?</h3>
+                        <p class="leading-relaxed"><strong class="text-[#2a2620]">Humans: Mon-Fri 8am-7pm CT.</strong> The AI line answers 24/7. Those are two different things, and we keep them separate on purpose.</p>
+                    </div>
+                    <!-- How It Works, kept recognizable as the three steps -->
+                    <div class="rv p-8 border-b border-r border-[#5c5346]/20 bg-[#fdfcf9]/40 md:col-span-2">
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-3">Q-05 &middot; GETTING STARTED</p>
+                        <h3 class="font-display text-lg font-bold text-[#2a2620] mb-5">How do we start?</h3>
+                        <div class="grid sm:grid-cols-3 gap-6">
+                            <div class="border-l-2 border-[#2a9d8f] pl-5 py-1">
+                                <p class="mono text-xs text-[#1e7268] mb-2">STEP 01</p>
+                                <p class="font-semibold text-[#2a2620] mb-1">Quick chat</p>
+                                <p class="text-sm leading-relaxed">A 15-minute call about your office, your tech, and whether we're a good fit.</p>
+                            </div>
+                            <div class="border-l-2 border-[#2a9d8f] pl-5 py-1">
+                                <p class="mono text-xs text-[#1e7268] mb-2">STEP 02</p>
+                                <p class="font-semibold text-[#2a2620] mb-1">Simple proposal</p>
+                                <p class="text-sm leading-relaxed">A clear, no-jargon proposal with exactly what you get and what it costs.</p>
+                            </div>
+                            <div class="border-l-2 border-[#2a9d8f] pl-5 py-1">
+                                <p class="mono text-xs text-[#1e7268] mb-2">STEP 03</p>
+                                <p class="font-semibold text-[#2a2620] mb-1">We're on it</p>
+                                <p class="text-sm leading-relaxed">You've got a tech team. Call, text, or email. Most offices are fully onboarded within a week or two.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 04 THE MIDDLE PATH ============ -->
+        <section data-section="4" class="relative bg-[#fdfcf9] py-20 px-6">
+            <span class="section-marker">04 | The Middle Path</span>
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-[#2a2620] mb-4">The middle path</h2>
+                <p class="max-w-2xl leading-relaxed mb-12">Small offices get three bad options for IT. We built the fourth.</p>
+
+                <div class="grid md:grid-cols-3 gap-px bg-[#5c5346]/20 border border-[#5c5346]/20 mb-8">
+                    <div class="rv bg-[#fdfcf9] p-8">
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#5c5346]/70 mb-3">OPTION A</p>
+                        <h3 class="font-display text-lg font-bold text-[#2a2620] mb-3">Big MSPs</h3>
+                        <p class="text-sm leading-relaxed">Expensive, impersonal, and built for companies ten times your size. Overkill for what a 1-15 person office needs.</p>
+                    </div>
+                    <div class="rv bg-[#fdfcf9] p-8">
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#5c5346]/70 mb-3">OPTION B</p>
+                        <h3 class="font-display text-lg font-bold text-[#2a2620] mb-3">Break/fix techs</h3>
+                        <p class="text-sm leading-relaxed">Fix one thing, then vanish. Next time something breaks, you start over with a stranger who has never seen your setup.</p>
+                    </div>
+                    <div class="rv bg-[#fdfcf9] p-8">
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#5c5346]/70 mb-3">OPTION C</p>
+                        <h3 class="font-display text-lg font-bold text-[#2a2620] mb-3">The accidental IT person</h3>
+                        <p class="text-sm leading-relaxed">Whoever on your team seemed "good with computers" gets drafted. Unfair to them, and it costs you their real job.</p>
+                    </div>
+                </div>
+
+                <div class="rv border-2 border-[#2a9d8f] p-8 md:p-10 bg-[#e8f5f3]">
+                    <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-3">THE FOURTH OPTION</p>
+                    <p class="font-display text-xl md:text-2xl font-bold text-[#2a2620] leading-snug max-w-3xl">We're the middle ground: a local Austin team, ongoing month-to-month support, people who know your setup and answer when you call.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 05 WHAT WE HANDLE + BUILT FOR OFFICES ============ -->
+        <section data-section="5" class="relative bg-[#fefae0] py-20 px-6">
+            <span class="section-marker">05 | What We Handle + Built for Offices</span>
+            <div class="max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-12 gap-8 mb-12 items-end">
+                    <div class="lg:col-span-8">
+                        <h2 class="font-display text-3xl md:text-4xl font-bold text-[#2a2620] mb-4">What we handle</h2>
+                        <p class="max-w-2xl leading-relaxed">Day-to-day office technology. The stuff that interrupts your work when it breaks, and the improvements that help you work smarter.</p>
+                    </div>
+                    <div class="lg:col-span-4 lg:justify-self-end">
+                        <a href="./services.html" class="mono text-xs tracking-wider text-[#1e7268] hover:text-[#2a2620] font-medium">ALL SERVICES &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 border-t border-l border-[#5c5346]/20 mb-6">
+                    <a href="./services.html#people-access" class="rv group p-7 border-b border-r border-[#5c5346]/20 hover:bg-[#fdfcf9]">
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#5c5346]/70 mb-3">S-01</p>
+                        <h3 class="font-display text-lg font-bold text-[#2a2620] mb-2 group-hover:text-[#1e7268]">People &amp; Access</h3>
+                        <p class="text-sm leading-relaxed">New employee setup, offboarding, email accounts, shared drives, permissions, password resets.</p>
+                    </a>
+                    <a href="./services.html#office-tools" class="rv group p-7 border-b border-r border-[#5c5346]/20 hover:bg-[#fdfcf9]">
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#5c5346]/70 mb-3">S-02</p>
+                        <h3 class="font-display text-lg font-bold text-[#2a2620] mb-2 group-hover:text-[#1e7268]">Office Tools &amp; Hardware</h3>
+                        <p class="text-sm leading-relaxed">Google Workspace, Microsoft 365, printers, phone systems, computer purchases, updates, troubleshooting.</p>
+                    </a>
+                    <a href="./services.html#security" class="rv group p-7 border-b border-r border-[#5c5346]/20 hover:bg-[#fdfcf9]">
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#5c5346]/70 mb-3">S-03</p>
+                        <h3 class="font-display text-lg font-bold text-[#2a2620] mb-2 group-hover:text-[#1e7268]">Security &amp; Compliance</h3>
+                        <p class="text-sm leading-relaxed">Password managers, 2FA, backup verification, HIPAA-friendly tool setup. Essential security boxes checked.</p>
+                    </a>
+                    <a href="./services.html#vendor" class="rv group p-7 border-b border-r border-[#5c5346]/20 hover:bg-[#fdfcf9]">
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#5c5346]/70 mb-3">S-04</p>
+                        <h3 class="font-display text-lg font-bold text-[#2a2620] mb-2 group-hover:text-[#1e7268]">Vendor Coordination</h3>
+                        <p class="text-sm leading-relaxed">ISP issues, copiers, phone and cell providers, software renewals. We make the calls and sit on hold.</p>
+                    </a>
+                    <a href="./services.html#custom-solutions" class="rv group p-7 border-b border-r border-[#5c5346]/20 hover:bg-[#fdfcf9]">
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#5c5346]/70 mb-3">S-05</p>
+                        <h3 class="font-display text-lg font-bold text-[#2a2620] mb-2 group-hover:text-[#1e7268]">Custom Solutions</h3>
+                        <p class="text-sm leading-relaxed">App integrations, workflow automations, and small tools built around how your office works.</p>
+                    </a>
+                    <a href="./services.html#ai-voice" class="rv group p-7 border-b border-r border-[#5c5346]/20 hover:bg-[#fdfcf9]">
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#5c5346]/70 mb-3">S-06</p>
+                        <div class="flex items-center gap-2 mb-2">
+                            <h3 class="font-display text-lg font-bold text-[#2a2620] group-hover:text-[#1e7268]">AI Voice Agents</h3>
+                            <span class="mono text-[0.6rem] tracking-wider border border-[#2a9d8f] text-[#1e7268] px-1.5 py-0.5 rounded-sm">24/7</span>
+                        </div>
+                        <p class="text-sm leading-relaxed">Never miss a call. AI answers, books appointments, and takes messages around the clock.</p>
+                    </a>
+                </div>
+
+                <!-- The one wry image moment: hold-music inset -->
+                <figure class="rv flex items-center gap-5 border border-[#5c5346]/20 bg-[#fdfcf9] p-5 mb-16 max-w-xl">
+                    <img src="./images/img-05-hold-music.webp" alt="A desk phone handset resting off the hook beside a cooling cup of coffee and a notepad with a scribbled reference number" class="w-24 h-24 object-cover shrink-0" width="96" height="96">
+                    <figcaption>
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#5c5346]/70 mb-1">VENDOR COORDINATION, PICTURED</p>
+                        <p class="font-display font-bold text-[#2a2620]">We handle the hold music.</p>
+                    </figcaption>
+                </figure>
+
+                <div class="border-t border-[#5c5346]/20 pt-12">
+                    <h3 class="font-display text-2xl font-bold text-[#2a2620] mb-3">Built for offices like yours</h3>
+                    <p class="max-w-2xl leading-relaxed mb-8">Professional service firms with 1 to 15 people. In-office, remote, or hybrid. No IT department needed.</p>
+                    <ul class="grid grid-cols-2 lg:grid-cols-3 border-t border-l border-[#5c5346]/20">
+                        <li class="rv mono text-xs tracking-wider text-[#2a2620] px-5 py-4 border-b border-r border-[#5c5346]/20">THERAPY &amp; MENTAL HEALTH</li>
+                        <li class="rv mono text-xs tracking-wider text-[#2a2620] px-5 py-4 border-b border-r border-[#5c5346]/20">LAW OFFICES</li>
+                        <li class="rv mono text-xs tracking-wider text-[#2a2620] px-5 py-4 border-b border-r border-[#5c5346]/20">ACCOUNTING &amp; CPA FIRMS</li>
+                        <li class="rv mono text-xs tracking-wider text-[#2a2620] px-5 py-4 border-b border-r border-[#5c5346]/20">ARCHITECTURE &amp; DESIGN</li>
+                        <li class="rv mono text-xs tracking-wider text-[#2a2620] px-5 py-4 border-b border-r border-[#5c5346]/20">REAL ESTATE OFFICES</li>
+                        <li class="rv mono text-xs tracking-wider text-[#2a2620] px-5 py-4 border-b border-r border-[#5c5346]/20">MEDICAL &amp; DENTAL ADMIN</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 06 TRY THE AI LINE ============ -->
+        <section data-section="6" id="ai-line" class="relative bg-[#e8f5f3] py-20 px-6 border-y border-[#5c5346]/15">
+            <span class="section-marker">06 | Try the AI Line</span>
+            <div class="max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-12 gap-10">
+                    <div class="lg:col-span-7">
+                        <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-4 flex items-center gap-2">
+                            <span class="pulse-dot inline-block w-2 h-2 rounded-full bg-[#2a9d8f]" aria-hidden="true"></span>
+                            LIVE DEMO &middot; SAME NUMBER &middot; ANY HOUR
+                        </p>
+                        <h2 class="font-display text-3xl md:text-4xl font-bold text-[#2a2620] mb-6">Try the AI line. Call it right now.</h2>
+                        <p class="leading-relaxed mb-4 max-w-xl">There's a lot of noise about AI right now. We'd rather show you than pitch you: call our number after hours and our AI voice agent picks up. It answers questions, books appointments, and takes messages. Sounds natural, not like a robot.</p>
+                        <p class="leading-relaxed mb-8 max-w-xl">This is the same system we set up for client offices that can't afford a missed call. Hear it on our line first, then decide if your front desk wants one.</p>
+                        <a href="tel:+15123182635" class="inline-block bg-[#e76f51] text-[#2a2620] font-semibold px-7 py-4 rounded-sm hover:opacity-90">Call (512) 318-2635</a>
+                    </div>
+                    <div class="lg:col-span-5">
+                        <div class="border border-[#5c5346]/25 bg-[#fdfcf9] p-7 h-full flex flex-col justify-center gap-5">
+                            <p class="mono text-[0.65rem] tracking-[0.18em] text-[#5c5346]/70">WHO ANSWERS WHEN</p>
+                            <div class="flex items-baseline justify-between gap-4 border-b border-[#5c5346]/15 pb-4">
+                                <p class="font-display font-bold text-[#2a2620]">A person</p>
+                                <p class="mono text-xs text-[#1e7268]">MON-FRI 8AM-7PM CT</p>
+                            </div>
+                            <div class="flex items-baseline justify-between gap-4 border-b border-[#5c5346]/15 pb-4">
+                                <p class="font-display font-bold text-[#2a2620]">The AI line</p>
+                                <p class="mono text-xs text-[#1e7268]">24/7, INCLUDING HOLIDAYS</p>
+                            </div>
+                            <p class="text-sm leading-relaxed">One number, two answerers. Human support runs business hours; the AI line covers everything outside them. We keep that distinction plain because trust depends on it.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 07 ANCHOR TESTIMONIAL ============ -->
+        <section data-section="7" class="relative bg-[#fdfcf9] py-20 px-6">
+            <span class="section-marker">07 | Anchor Testimonial</span>
+            <div class="max-w-6xl mx-auto">
+                <h2 class="sr-only">What our clients say</h2>
+                <p class="mono text-[0.65rem] tracking-[0.18em] text-[#1e7268] mb-10">ON THE RECORD &middot; PSYCHIATRY AUSTIN</p>
+                <div class="grid lg:grid-cols-12 gap-10 items-start">
+                    <figure class="rv lg:col-span-4 max-w-xs">
+                        <img src="./images/img-04-leonard.webp" alt="Leonard Weiss, M.D., psychiatrist and practice owner at Psychiatry Austin" class="w-full aspect-[4/5] object-cover border border-[#5c5346]/20" width="400" height="500">
+                        <figcaption class="mono text-[0.65rem] tracking-wider text-[#5c5346]/70 mt-3">LEONARD WEISS, M.D. &middot; AUSTIN, TX</figcaption>
+                    </figure>
+                    <div class="rv lg:col-span-8">
+                        <blockquote class="font-display text-xl md:text-2xl font-semibold text-[#2a2620] leading-relaxed mb-8">
+                            "Before ASOT, our office was constantly dealing with tech headaches. Someone's email wouldn't sync, the printer would go offline during busy days, and I was always the one everyone turned to for help, which took time away from my patients. Now I have one number to call, and they handle everything. The peace of mind alone is worth it. I can focus on medicine instead of troubleshooting Wi-Fi."
+                        </blockquote>
+                        <div class="flex flex-wrap items-center justify-between gap-6 border-t border-[#5c5346]/15 pt-6">
+                            <div>
+                                <p class="font-semibold text-[#2a2620]">Leonard Weiss, M.D.</p>
+                                <p class="text-sm text-[#5c5346]">Psychiatrist &amp; Practice Owner, Psychiatry Austin</p>
+                            </div>
+                            <img src="./images/psychiatry-austin-logo.svg" alt="Psychiatry Austin logo" class="h-10 w-auto" height="40">
+                        </div>
+                        <a href="./testimonials.html" class="mono text-xs tracking-wider text-[#1e7268] hover:text-[#2a2620] font-medium inline-block mt-6">MORE CLIENT STORIES &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 08 HONEST SCOPE ============ -->
+        <section data-section="8" class="relative bg-[#e9e5d6] py-16 px-6">
+            <span class="section-marker">08 | Honest Scope</span>
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-display text-2xl md:text-3xl font-bold text-[#2a2620] mb-3">What we don't do</h2>
+                <p class="max-w-2xl leading-relaxed mb-8">Stated as plainly as what we do. If your situation lands on this list, we'll say so on the first call and point you to someone good.</p>
+                <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3 mb-8 max-w-4xl">
+                    <li class="mono text-xs tracking-wider text-[#2a2620] py-2 border-b border-[#5c5346]/20">NO ON-SITE SERVER INFRASTRUCTURE</li>
+                    <li class="mono text-xs tracking-wider text-[#2a2620] py-2 border-b border-[#5c5346]/20">NO ENTERPRISE COMPLIANCE AUDITS (SOC2)</li>
+                    <li class="mono text-xs tracking-wider text-[#2a2620] py-2 border-b border-[#5c5346]/20">NO POS SYSTEMS</li>
+                    <li class="mono text-xs tracking-wider text-[#2a2620] py-2 border-b border-[#5c5346]/20">NO NETWORK CABLING</li>
+                    <li class="mono text-xs tracking-wider text-[#2a2620] py-2 border-b border-[#5c5346]/20">NO 24/7 HUMAN SUPPORT</li>
+                    <li class="mono text-xs tracking-wider text-[#2a2620] py-2 border-b border-[#5c5346]/20">NO HIPAA COMPLIANCE CONSULTING</li>
+                </ul>
+                <p class="max-w-2xl leading-relaxed text-sm">On HIPAA: we set up HIPAA-friendly tools and the security basics that go with them. For a full compliance audit you want a specialist, and we're happy to recommend one. For everything else in everyday office tech, <a href="./contact.html" class="text-[#1e7268] font-semibold underline underline-offset-2 hover:text-[#2a2620]">we're always up for a chat about your specific situation</a>.</p>
+            </div>
+        </section>
+
+        <!-- ============ 09 CLOSING CTA ============ -->
+        <section data-section="9" class="band-dark grain relative bg-[#264653] py-24 px-6 overflow-hidden">
+            <span class="section-marker section-marker--light">09 | Closing CTA</span>
+            <div class="max-w-6xl mx-auto">
+                <p class="mono text-xs tracking-[0.2em] text-[#2a9d8f] mb-6">NO PRESSURE, NO OBLIGATION, NO JARGON</p>
+                <h2 class="font-display font-extrabold text-[#fdfcf9] leading-tight tracking-tight mb-6" style="font-size: clamp(2.25rem, 5vw, 4rem);">Let's talk.</h2>
+                <p class="text-lg text-[#e8f5f3]/90 leading-relaxed max-w-xl mb-10">A 15-minute call about your office and whether we're a fit. We'd rather have 50 clients who love us than 500 who barely know our name.</p>
+                <div class="flex flex-wrap items-center gap-4 mb-10">
+                    <a href="tel:+15123182635" class="mono bg-[#e76f51] text-[#2a2620] font-semibold text-lg px-8 py-4 rounded-sm hover:opacity-90">Call (512) 318-2635</a>
+                    <a href="./contact.html" class="border-2 border-[#2a9d8f] text-[#fdfcf9] font-semibold text-lg px-8 py-4 rounded-sm hover:bg-[#2a9d8f]/20">See If We're a Fit</a>
+                </div>
+                <div class="flex flex-wrap gap-x-8 gap-y-2 mono text-[0.65rem] tracking-wider text-[#e8f5f3]/70">
+                    <p>HUMANS: MON-FRI 8AM-7PM CT</p>
+                    <p>AI LINE: 24/7</p>
+                    <a href="mailto:hello@austinsmallofficetech.com" class="text-[#e8f5f3] hover:text-[#2a9d8f]">HELLO@AUSTINSMALLOFFICETECH.COM</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="band-dark bg-[#1d3742] py-12 px-6 border-t border-[#e8f5f3]/10">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <p class="font-display text-lg font-bold text-[#fdfcf9]">ASOT</p>
+                    <p class="mono text-[0.65rem] tracking-wider text-[#e8f5f3]/60 mt-1">AUSTIN SMALL OFFICE TECH</p>
+                    <p class="text-sm text-[#e8f5f3]/70 mt-4 max-w-sm leading-relaxed">IT support built for small Austin offices. Local team, clear communication, same-day response.</p>
+                </div>
+                <nav aria-label="Footer" class="flex flex-col gap-2">
+                    <p class="mono text-[0.65rem] tracking-[0.18em] text-[#e8f5f3]/50 mb-1">PAGES</p>
+                    <a href="./about.html" class="text-sm text-[#e8f5f3]/80 hover:text-[#fdfcf9]">About</a>
+                    <a href="./services.html" class="text-sm text-[#e8f5f3]/80 hover:text-[#fdfcf9]">Services</a>
+                    <a href="./testimonials.html" class="text-sm text-[#e8f5f3]/80 hover:text-[#fdfcf9]">Testimonials</a>
+                    <a href="./faq.html" class="text-sm text-[#e8f5f3]/80 hover:text-[#fdfcf9]">FAQ</a>
+                    <a href="./contact.html" class="text-sm text-[#e8f5f3]/80 hover:text-[#fdfcf9]">Contact</a>
+                </nav>
+                <div class="flex flex-col gap-2">
+                    <p class="mono text-[0.65rem] tracking-[0.18em] text-[#e8f5f3]/50 mb-1">ONE NUMBER</p>
+                    <a href="tel:+15123182635" class="mono text-sm font-semibold text-[#e8f5f3] hover:text-[#2a9d8f]">(512) 318-2635</a>
+                    <a href="mailto:hello@austinsmallofficetech.com" class="text-sm text-[#e8f5f3]/80 hover:text-[#fdfcf9] break-all">hello@austinsmallofficetech.com</a>
+                    <p class="text-sm text-[#e8f5f3]/60">Austin, TX</p>
+                </div>
+            </div>
+            <div class="border-t border-[#e8f5f3]/10 pt-8">
+                <p class="mono text-[0.65rem] tracking-wider text-[#e8f5f3]/50">&copy; 2026 AUSTIN SMALL OFFICE TECH &middot; IT SUPPORT FOR SMALL AUSTIN OFFICES AND REMOTE TEAMS</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        var menuBtn = document.getElementById('mobile-menu-btn');
+        var menu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', function () {
+            var open = menu.classList.toggle('hidden');
+            menuBtn.setAttribute('aria-expanded', String(!open));
+        });
+
+        // Scroll reveals, only when motion is allowed
+        if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('rv-in');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+            document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
+        } else {
+            document.querySelectorAll('.rv').forEach(function (el) { el.classList.add('rv-in'); });
+        }
+    </script>
+</body>
+</html>
